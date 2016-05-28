@@ -31,6 +31,9 @@
 bin/
 out/
 
+#Other files
+*.db
+
 # =========================
 # Operating System Files
 # =========================
