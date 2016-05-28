@@ -33,6 +33,7 @@ out/
 
 #Other files
 *.db
+*.suo
 
 # =========================
 # Operating System Files
