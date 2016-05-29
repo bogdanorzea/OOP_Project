@@ -1,6 +1,6 @@
 #pragma once
 
-// Declaration
+#pragma region Declaration
 template <class T>
 class Fraction
 {
@@ -16,8 +16,10 @@ public:
 
 	~Fraction();
 };
+#pragma endregion
 
-// Implementation
+#pragma region Implementation
+
 template <class T>
 Fraction<T>::Fraction()
 {
@@ -56,3 +58,4 @@ T Fraction<T>::Denominator()
 {
 	return denominator;
 }
+#pragma endregion

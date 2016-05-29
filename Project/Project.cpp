@@ -15,6 +15,5 @@ int main() {
 	Fraction<int> fractie1 = Fraction<int>();
 	Fraction<int> fractie2 = Fraction<int>(2);
 	Fraction<int> fractie3 = Fraction<int>(2, 3);
-
-	cout << fractie3.Numerator();
+	Fraction<float> fractie4 = Fraction<float>(2.3, 3);
 }
