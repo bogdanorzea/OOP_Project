@@ -1,3 +1,3 @@
 ﻿  FractionProgram.cpp
-c:\users\bogdan\dropbox\unibuc\_anul 1\oop\oop_project\fractionprogram\fractionprogram\fractionprogram.cpp(14): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\bogdan\dropbox\unibuc\_anul 1\oop\oop_project\fractionprogram\fractionprogram\fractionprogram.cpp(17): warning C4305: 'argument': truncation from 'double' to 'float'
   FractionProgram.vcxproj -> C:\Users\Bogdan\Dropbox\UNIBUC\_Anul 1\OOP\OOP_Project\FractionProgram\Debug\FractionProgram.exe

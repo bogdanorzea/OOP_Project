@@ -34,7 +34,7 @@ template <class T>
 Fraction<T>::Fraction(T _num)
 {
 	numerator = _num;
-	//denominator = 1;
+	denominator = (T)1;
 	cout << "Fraction is " << _num << endl;
 }
 
