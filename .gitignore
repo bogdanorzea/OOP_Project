@@ -30,6 +30,7 @@
 #Folders
 bin/
 out/
+Debug/
 
 #Other files
 *.db
