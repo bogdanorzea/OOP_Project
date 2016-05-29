@@ -85,3 +85,13 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.pdb
+*.tlog
+Project/x64/Debug/Project.log
+*.opendb
+*.idb
+x64/Debug/Project.ilk
+/ipch
+/x64/Debug
+/UnitTest1/x64/Debug
+/FractionProgram/UnitTests/Debug
