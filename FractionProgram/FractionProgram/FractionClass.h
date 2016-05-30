@@ -18,6 +18,10 @@ public:
 	T Numerator();
 	T Denominator();
 
+	Fraction<T> operator+(Fraction<T>);
+
+	double ToDouble();
+
 	~Fraction();
 };
 #pragma endregion
@@ -62,4 +66,32 @@ T Fraction<T>::Denominator()
 {
 	return denominator;
 }
+
+template<class T>
+Fraction<T> Fraction<T>::operator+(Fraction<T> _fraction)
+{
+	T _den = LCM(denominator, _fraction.Denominator());
+	T _num = numerator * _den / _fraction.Denominator() + _fraction.Numerator() * _den / denominator;
+
+	Fraction<T> retFraction = Fraction<T>(_num, _den);
+	return retFraction;
+}
+
+template<class T>
+double Fraction<T>::ToDouble()
+{
+	return (double)numerator / denominator;
+}
+
 #pragma endregion
+
+template<class T>
+T LCM(T first, T second) {
+	return (T)(first / GCD(first, second) * second);
+}
+
+template<class T>
+T GCD(T first, T second) {
+	if (second == 0) return first;
+	else return GCD(second, first % second);
+}
