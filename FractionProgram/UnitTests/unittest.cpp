@@ -66,14 +66,12 @@ namespace UnitTests
 		TEST_METHOD(AddingFractions) {
 			Fraction<int> fract1 = Fraction<int>(3, 2);
 			Fraction<int> fract2 = Fraction<int>(1, 2);
-
 			Assert::AreEqual((fract1 + fract2).Numerator(), 4);
 			Assert::AreEqual((fract1 + fract2).Denominator(), 2);
 			
 			
 			Fraction<int> fract3 = Fraction<int>(3, 99);
 			Fraction<int> fract4 = Fraction<int>(40, 21);
-
 			Assert::AreEqual((fract3 + fract4).Numerator(), 149);
 			Assert::AreEqual((fract3 + fract4).Denominator(), 77);
 		}
