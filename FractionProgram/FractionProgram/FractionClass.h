@@ -19,6 +19,7 @@ public:
 	T Denominator();
 
 	Fraction<T> operator+(Fraction<T>);
+	Fraction<T> operator-(Fraction<T>);
 
 	double ToDouble();
 
@@ -56,13 +57,13 @@ Fraction<T>::~Fraction()
 }
 
 template <class T>
-T Fraction<T>::Numerator()
+inline T Fraction<T>::Numerator()
 {
 	return numerator;
 }
 
 template <class T>
-T Fraction<T>::Denominator()
+inline T Fraction<T>::Denominator()
 {
 	return denominator;
 }
@@ -71,11 +72,22 @@ template<class T>
 Fraction<T> Fraction<T>::operator+(Fraction<T> _fraction)
 {
 	T _den = LCM(denominator, _fraction.Denominator());
-	T _num = numerator * _den / _fraction.Denominator() + _fraction.Numerator() * _den / denominator;
+	T _num = numerator * _den / denominator + _fraction.Numerator() * _den / _fraction.Denominator();
 
 	Fraction<T> retFraction = Fraction<T>(_num, _den);
 	return retFraction;
 }
+
+template<class T>
+Fraction<T> Fraction<T>::operator-(Fraction<T> _fraction)
+{
+	T _den = LCM(denominator, _fraction.Denominator());
+	T _num = numerator * _den / denominator - _fraction.Numerator() * _den / _fraction.Denominator();
+
+	Fraction<T> retFraction = Fraction<T>(_num, _den);
+	return retFraction;
+}
+
 
 template<class T>
 double Fraction<T>::ToDouble()
@@ -92,6 +104,10 @@ T LCM(T first, T second) {
 
 template<class T>
 T GCD(T first, T second) {
-	if (second == 0) return first;
-	else return GCD(second, first % second);
+	if (second == 0) {
+		return first;
+	}
+	else {
+		return GCD(second, first % second);
+	}
 }
