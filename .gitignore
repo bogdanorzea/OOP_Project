@@ -97,3 +97,4 @@ x64/Debug/Project.ilk
 /x64/Debug
 /UnitTest1/x64/Debug
 /FractionProgram/UnitTests/Debug
+*.TMP
