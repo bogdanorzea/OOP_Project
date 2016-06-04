@@ -9,29 +9,6 @@ namespace UnitTests
 	{
 	public:
 
-		TEST_METHOD(CreateWithTwoArguments)
-		{
-			// Integer fraction type
-			Fraction<int> iFraction = Fraction<int>(2, 3);
-			Assert::AreEqual(iFraction.Numerator(), 2);
-			Assert::AreEqual(iFraction.Denominator(), 3);
-
-			// Long fraction type
-			Fraction<long> lFraction = Fraction<long>(2L, 3L);
-			Assert::AreEqual(lFraction.Numerator(), 2L);
-			Assert::AreEqual(lFraction.Denominator(), 3L);
-
-			// Double fraction type
-			Fraction<double> dFraction = Fraction<double>(2.0, 3.0);
-			Assert::AreEqual(dFraction.Numerator(), 2.0);
-			Assert::AreEqual(dFraction.Denominator(), 3.0);
-
-			// Float fraction type
-			Fraction<float> fFraction = Fraction<float>(2.f, 3.f);
-			Assert::AreEqual(fFraction.Numerator(), 2.f);
-			Assert::AreEqual(fFraction.Denominator(), 3.f);
-		}
-
 		TEST_METHOD(CreateWithOneArgument)
 		{
 			// Integer fraction type
@@ -53,6 +30,29 @@ namespace UnitTests
 			Fraction<float> fFraction = Fraction<float>(2.f);
 			Assert::AreEqual(fFraction.Numerator(), 2.f);
 			Assert::AreEqual(fFraction.Denominator(), 1.f);
+		}
+
+		TEST_METHOD(CreateWithTwoArguments)
+		{
+			// Integer fraction type
+			Fraction<int> iFraction = Fraction<int>(2, 3);
+			Assert::AreEqual(iFraction.Numerator(), 2);
+			Assert::AreEqual(iFraction.Denominator(), 3);
+
+			// Long fraction type
+			Fraction<long> lFraction = Fraction<long>(2L, 3L);
+			Assert::AreEqual(lFraction.Numerator(), 2L);
+			Assert::AreEqual(lFraction.Denominator(), 3L);
+
+			// Double fraction type
+			Fraction<double> dFraction = Fraction<double>(2.0, 3.0);
+			Assert::AreEqual(dFraction.Numerator(), 2.0);
+			Assert::AreEqual(dFraction.Denominator(), 3.0);
+
+			// Float fraction type
+			Fraction<float> fFraction = Fraction<float>(2.f, 3.f);
+			Assert::AreEqual(fFraction.Numerator(), 2.f);
+			Assert::AreEqual(fFraction.Denominator(), 3.f);
 		}
 
 		TEST_METHOD(AddingFractions) {
@@ -92,6 +92,19 @@ namespace UnitTests
 			Fraction<int> fract4 = Fraction<int>(40, 21);
 			Assert::AreEqual((fract3 * fract4).Numerator(), 5 * 40);
 			Assert::AreEqual((fract3 * fract4).Denominator(), 99 * 21);
+		}
+
+		TEST_METHOD(DividingFractions) {
+			Fraction<int> fract1 = Fraction<int>(3, 2);
+			Fraction<int> fract2 = Fraction<int>(1, 2);
+			Assert::AreEqual((fract1 / fract2).Numerator(), 3);
+			Assert::AreEqual((fract1 / fract2).Denominator(), 1);
+
+
+			Fraction<int> fract3 = Fraction<int>(5, 99);
+			Fraction<int> fract4 = Fraction<int>(40, 21);
+			Assert::AreEqual((fract3 / fract4).Numerator(), 7);
+			Assert::AreEqual((fract3 / fract4).Denominator(), 264);
 		}
 
 		TEST_METHOD(SimplifyFraction) {

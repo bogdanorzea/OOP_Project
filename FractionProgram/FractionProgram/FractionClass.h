@@ -41,23 +41,12 @@ Fraction<T>::Fraction()
 	cout << "Fraction is " << numerator << "/" << denominator << endl;
 }
 
-//template <class T>
-//Fraction<T>::Fraction(T _num)
-//{
-//	numerator = _num;
-//	denominator = (T)1;
-//	cout << "Fraction is " << _num << endl;
-//}
-
 template <class T>
 Fraction<T>::Fraction(T _num, T _den = (T)1)
 {
 	numerator = _num;
 	denominator = _den;
-	//if (typeid(int) == typeid(T))
-	//{
 	Simplify();
-	//}
 
 	cout << "Fraction is " << _num << "/" << _den << endl;
 }
@@ -111,7 +100,7 @@ Fraction<T> Fraction<T>::operator*(Fraction<T> _fraction)
 }
 
 template<class T>
-Fraction<T> Fraction<T>::operator/(Fraction<T>)
+Fraction<T> Fraction<T>::operator/(Fraction<T> _fraction)
 {
 	T _num = numerator * _fraction.Denominator();
 	T _den = denominator * _fraction.Numerator();
@@ -141,7 +130,7 @@ Fraction<T>& Fraction<T>::Simplify()
 {
 	if (typeid(int).name() == typeid(T).name())
 	{
-		auto divizor = GCD(std::abs(denominator), std::abs(numerator));
+		T divizor = GCD(std::abs(denominator), std::abs(numerator));
 		numerator /= divizor;
 		denominator /= divizor;
 	}
