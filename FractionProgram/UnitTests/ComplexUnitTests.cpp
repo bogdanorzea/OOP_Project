@@ -61,7 +61,7 @@ namespace UnitTests
 			Assert::AreEqual(Complex<int>(-2, -3).Imaginary(), -3);
 		}
 
-		TEST_METHOD(Complex_AdditionOperator) {
+		TEST_METHOD(Complex_OperatorAddition) {
 			Complex<int> temp1 = Complex<int>(3, 2) + Complex<int>(1, 2);
 			Assert::AreEqual(temp1.Real(), 4);
 			Assert::AreEqual(temp1.Imaginary(), 4);
@@ -73,6 +73,10 @@ namespace UnitTests
 			Complex<double> temp3 = Complex<double>(3.0, 2.0) + Complex<double>(1.0, 2.9);
 			Assert::AreEqual(temp3.Real(), 4.0);
 			Assert::AreEqual(temp3.Imaginary(), 4.9);
+
+			Complex<double> temp4 = Complex<double>(3.0, 2.0) + 1.0;
+			Assert::AreEqual(temp4.Real(), 4.0);
+			Assert::AreEqual(temp4.Imaginary(), 2.0);
 		}
 
 		TEST_METHOD(Complex_OperatorAdditionUnary) {
@@ -99,6 +103,10 @@ namespace UnitTests
 			Assert::AreEqual((temp3 - temp4).Imaginary(), 78);
 			Assert::AreEqual((-temp3 - -temp4).Real(), 35);
 			Assert::AreEqual((-temp3 - -temp4).Imaginary(), -78);
+
+			Complex<double> temp5 = Complex<double>(3.0, 2.0) - 1.0;
+			Assert::AreEqual(temp5.Real(), 2.0);
+			Assert::AreEqual(temp5.Imaginary(), 2.0);
 		}
 
 		TEST_METHOD(Complex_OperatorSubstractionUnary) {
@@ -137,6 +145,10 @@ namespace UnitTests
 			Complex<int> temp4 = Complex<int>(40, 21);
 			Assert::AreEqual((temp3 * temp4).Real(), -1879);
 			Assert::AreEqual((temp3 * temp4).Imaginary(), 4065);
+
+			Complex<double> temp5 = Complex<double>(3.0, 2.0) * 4.0;
+			Assert::AreEqual(temp5.Real(), 12.0);
+			Assert::AreEqual(temp5.Imaginary(), 8.0);
 		}
 
 		TEST_METHOD(Complex_OperatorDivision) {
@@ -149,6 +161,10 @@ namespace UnitTests
 			Complex<double> temp4 = Complex<double>(4.80, 2.781);
 			Assert::AreEqual((temp3 / temp4).Real(), 9.16, 0.01);
 			Assert::AreEqual((temp3 / temp4).Imaginary(), 13.81, 0.01);
+
+			Complex<double> temp5 = Complex<double>(3.0, 2.0) / 4.0;
+			Assert::AreEqual(temp5.Real(), 0.75);
+			Assert::AreEqual(temp5.Imaginary(), 0.5);
 		}
 
 		TEST_METHOD(Complex_OperatorExponentiation) {
@@ -197,8 +213,5 @@ namespace UnitTests
 			Assert::AreEqual(Complex<int>(3, 2) >= Complex<int>(3, 2), true);
 		}
 
-		//TEST_METHOD(CastToFractions) {
-		//	
-		//}
 	};
 }

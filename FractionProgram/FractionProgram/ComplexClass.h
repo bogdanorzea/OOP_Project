@@ -4,7 +4,6 @@
 
 #define	SIGN(x) ((x < 0) ? ("-") : ("+"))
 
-
 using namespace std;
 
 #pragma region Declaration
@@ -22,11 +21,14 @@ public:
 	T Imaginary();
 
 	Complex<T> operator+(Complex<T>);
+	Complex<T> operator+(T);
 	Complex<T> operator+();
 	Complex<T> operator-(Complex<T>);
+	Complex<T> operator-(T);
 	Complex<T> operator-();
 	Complex<T>& operator=(Complex<T>);
 	Complex<T> operator*(Complex<T>);
+	Complex<T> operator*(T);
 	Complex<T> operator/(Complex<T>);
 	Complex<T> operator/(T);
 
@@ -51,7 +53,7 @@ public:
 template <class T>
 Complex<T>::Complex()
 {
-	cout << "Complex number is " << real << SIGN(imaginary) << "i*" << imaginary << endl;
+	cout << "Complex number is " << real << SIGN(imaginary) << imaginary << "*i" << endl;
 }
 
 template <class T>
@@ -60,7 +62,7 @@ Complex<T>::Complex(T _real, T _imag = (T)0)
 	real = _real;
 	imaginary = _imag;
 
-	cout << "Complex number is " << real << SIGN(imaginary) << "i*" << imaginary << endl;
+	cout << "Complex number is " << real << SIGN(imaginary) << imaginary << "*i" << endl;
 }
 
 template <class T>
@@ -86,18 +88,19 @@ Complex<T> Complex<T>::operator+(Complex<T> _complex)
 	T _real = real + _complex.Real();
 	T _imag = imaginary + _complex.Imaginary();
 
-	Complex<T> retComplex = Complex<T>(_real, _imag);
-	return retComplex;
+	return Complex<T>(_real, _imag);
+}
+
+template<class T>
+Complex<T> Complex<T>::operator+(T _number)
+{
+	return Complex<T>(real + _number, imaginary);
 }
 
 template<class T>
 Complex<T> Complex<T>::operator+()
 {
-	T _real = real;
-	T _imag = imaginary;
-
-	Complex<T> retComplex = Complex<T>(_real, _imag);
-	return retComplex;
+	return Complex<T>(real, imaginary);
 }
 
 template<class T>
@@ -106,8 +109,13 @@ Complex<T> Complex<T>::operator-(Complex<T> _complex)
 	T _real = real - _complex.Real();
 	T _imag = imaginary - _complex.Imaginary();
 
-	Complex<T> retComplex = Complex<T>(_real, _imag);
-	return retComplex;
+	return Complex<T>(_real, _imag);
+}
+
+template<class T>
+Complex<T> Complex<T>::operator-(T _number)
+{
+	return Complex<T>(real - _number, imaginary);
 }
 
 template<class T>
@@ -116,8 +124,7 @@ Complex<T> Complex<T>::operator-()
 	T _real = (-1)*real;
 	T _imag = (-1)*imaginary;
 
-	Complex<T> retComplex = Complex<T>(_real, _imag);
-	return retComplex;
+	return Complex<T>(_real, _imag);
 }
 
 template<class T>
@@ -136,6 +143,7 @@ bool Complex<T>::operator==(Complex<T> _complex)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -146,6 +154,7 @@ bool Complex<T>::operator<(Complex<T> _complex)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -156,6 +165,7 @@ bool Complex<T>::operator<=(Complex<T> _complex)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -166,6 +176,7 @@ bool Complex<T>::operator>(Complex<T> _complex)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -176,6 +187,7 @@ bool Complex<T>::operator>=(Complex<T> _complex)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -197,8 +209,16 @@ Complex<T> Complex<T>::operator*(Complex<T> _complex)
 	T _real = real *  _complex.Real() - imaginary * _complex.Imaginary();
 	T _imag = real * _complex.Imaginary() + imaginary * _complex.Real();
 
-	Complex<T> retComplex = Complex<T>(_real, _imag);
-	return retComplex;
+	return Complex<T>(_real, _imag);
+}
+
+template<class T>
+Complex<T> Complex<T>::operator*(T _multiplier)
+{
+	T _real = real * _multiplier;
+	T _imag = imaginary * _multiplier;
+
+	return Complex<T>(_real, _imag);
 }
 
 template<class T>
@@ -214,8 +234,7 @@ Complex<T> Complex<T>::operator/(T _divisor)
 	T _real = real / _divisor;
 	T _imag = imaginary / _divisor;
 
-	Complex<T> retComplex = Complex<T>(_real, _imag);
-	return retComplex;
+	return Complex<T>(_real, _imag);
 }
 
 template<class T>
@@ -242,5 +261,4 @@ Complex<T> Complex<T>::operator^(int _power)
 		return Complex<T>(1) / retComplex;
 	}
 }
-
 #pragma endregion

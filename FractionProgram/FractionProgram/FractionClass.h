@@ -20,12 +20,16 @@ public:
 	T Denominator();
 
 	Fraction<T> operator+(Fraction<T>);
+	Fraction<T> operator+(T);
 	Fraction<T> operator+();
 	Fraction<T> operator-(Fraction<T>);
+	Fraction<T> operator-(T);
 	Fraction<T> operator-();
 	Fraction<T>& operator=(Fraction<T>);
 	Fraction<T> operator*(Fraction<T>);
+	Fraction<T> operator*(T);
 	Fraction<T> operator/(Fraction<T>);
+	Fraction<T> operator/(T);
 	Fraction<T> operator^(T);
 
 	bool operator==(Fraction<T>);
@@ -95,6 +99,12 @@ Fraction<T> Fraction<T>::operator+(Fraction<T> _fraction)
 }
 
 template<class T>
+Fraction<T> Fraction<T>::operator+(T _number)
+{
+	return Fraction<T>(numerator, denominator) + Fraction<T>(_number);
+}
+
+template<class T>
 Fraction<T> Fraction<T>::operator+()
 {
 	T _num = numerator;
@@ -112,6 +122,12 @@ Fraction<T> Fraction<T>::operator-(Fraction<T> _fraction)
 
 	Fraction<T> retFraction = Fraction<T>(_num, _den);
 	return retFraction;
+}
+
+template<class T>
+Fraction<T> Fraction<T>::operator-(T _number)
+{
+	return Fraction<T>(numerator, denominator) - Fraction<T>(_number);
 }
 
 template<class T>
@@ -140,6 +156,7 @@ bool Fraction<T>::operator==(Fraction<T> _fraction)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -150,6 +167,7 @@ bool Fraction<T>::operator<(Fraction<T> _fraction)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -160,6 +178,7 @@ bool Fraction<T>::operator<=(Fraction<T> _fraction)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -170,6 +189,7 @@ bool Fraction<T>::operator>(Fraction<T> _fraction)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -180,6 +200,7 @@ bool Fraction<T>::operator>=(Fraction<T> _fraction)
 	{
 		return true;
 	}
+	
 	return false;
 }
 
@@ -200,6 +221,12 @@ Fraction<T> Fraction<T>::operator*(Fraction<T> _fraction)
 }
 
 template<class T>
+Fraction<T> Fraction<T>::operator*(T _multiplicator)
+{
+	return Fraction<T>(numerator * _multiplicator, denominator);
+}
+
+template<class T>
 Fraction<T> Fraction<T>::operator/(Fraction<T> _fraction)
 {
 	T _num = numerator * _fraction.Denominator();
@@ -207,6 +234,12 @@ Fraction<T> Fraction<T>::operator/(Fraction<T> _fraction)
 
 	Fraction<T> retFraction = Fraction<T>(_num, _den);
 	return retFraction;
+}
+
+template<class T>
+Fraction<T> Fraction<T>::operator/(T _divisor)
+{
+	return Fraction<T>(numerator, denominator * _divisor);
 }
 
 template<class T>
