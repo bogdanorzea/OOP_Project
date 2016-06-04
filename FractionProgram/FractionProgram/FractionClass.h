@@ -34,6 +34,8 @@ public:
 	bool operator>(Fraction<T>);
 	bool operator>=(Fraction<T>);
 
+	operator double();
+
 	Fraction<T>& Simplify();
 
 	double ToDouble();
@@ -134,7 +136,7 @@ Fraction<T>& Fraction<T>::operator=(Fraction<T> _fraction)
 template<class T>
 bool Fraction<T>::operator==(Fraction<T> _fraction)
 {
-	if (denominator == _fraction.Denominator() && numerator == _fraction.Numerator())
+	if (this->ToDouble() == _fraction.ToDouble())
 	{
 		return true;
 	}
@@ -144,25 +146,47 @@ bool Fraction<T>::operator==(Fraction<T> _fraction)
 template<class T>
 bool Fraction<T>::operator<(Fraction<T> _fraction)
 {
+	if (this->ToDouble() < _fraction.ToDouble())
+	{
+		return true;
+	}
 	return false;
 }
 
 template<class T>
 bool Fraction<T>::operator<=(Fraction<T> _fraction)
 {
+	if (this->ToDouble() <= _fraction.ToDouble())
+	{
+		return true;
+	}
 	return false;
 }
 
 template<class T>
 bool Fraction<T>::operator>(Fraction<T> _fraction)
 {
+	if (this->ToDouble() > _fraction.ToDouble())
+	{
+		return true;
+	}
 	return false;
 }
 
 template<class T>
 bool Fraction<T>::operator>=(Fraction<T> _fraction)
 {
+	if (this->ToDouble() >= _fraction.ToDouble())
+	{
+		return true;
+	}
 	return false;
+}
+
+template<class T>
+Fraction<T>::operator double()
+{
+	return (double)numerator / denominator;
 }
 
 template<class T>

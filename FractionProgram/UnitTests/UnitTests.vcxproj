@@ -154,7 +154,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="unittest.cpp" />
+    <ClCompile Include="FractionUnitTests.cpp" />
+    <ClCompile Include="ComplexUnitTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FractionProgram\FractionProgram.vcxproj">
