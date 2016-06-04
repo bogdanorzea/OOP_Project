@@ -54,7 +54,7 @@ namespace UnitTests
 			Assert::AreEqual(fFraction.Numerator(), 2.f);
 			Assert::AreEqual(fFraction.Denominator(), 3.f);
 		}
-
+		
 		TEST_METHOD(AddingFractions) {
 			Fraction<int> fract1 = Fraction<int>(3, 2);
 			Fraction<int> fract2 = Fraction<int>(1, 2);
@@ -66,6 +66,18 @@ namespace UnitTests
 			Fraction<int> fract4 = Fraction<int>(40, 21);
 			Assert::AreEqual((fract3 + fract4).Numerator(), 1355);
 			Assert::AreEqual((fract3 + fract4).Denominator(), 693);
+			Assert::AreEqual((-fract3 + -fract4).Numerator(), -1355);
+			Assert::AreEqual((-fract3 + -fract4).Denominator(), 693);
+		}
+
+		TEST_METHOD(UnaryAddingFractions) {
+			Fraction<int> fract1 = Fraction<int>(-3, 2);
+			Assert::AreEqual((+fract1).Numerator(), -3);
+			Assert::AreEqual((+fract1).Denominator(), 2);
+
+			Fraction<double> fract2 = Fraction<double>(5.0, 99.0);
+			Assert::AreEqual((+fract2).Numerator(), +5.0);
+			Assert::AreEqual((+fract2).Denominator(), 99.0);
 		}
 
 		TEST_METHOD(SubstractingFractions) {
@@ -73,12 +85,42 @@ namespace UnitTests
 			Fraction<int> fract2 = Fraction<int>(1, 2);
 			Assert::AreEqual((fract1 - fract2).Numerator(), 1);
 			Assert::AreEqual((fract1 - fract2).Denominator(), 1);
-
+			Assert::AreEqual((-fract1 - fract2).Numerator(), -2);
+			Assert::AreEqual((-fract1 - fract2).Denominator(), 1);
 
 			Fraction<int> fract3 = Fraction<int>(5, 99);
 			Fraction<int> fract4 = Fraction<int>(40, 21);
-			Assert::AreEqual((fract3 - fract4).Numerator(), - 1285);
+			Assert::AreEqual((fract3 - fract4).Numerator(), -1285);
 			Assert::AreEqual((fract3 - fract4).Denominator(), 693);
+			Assert::AreEqual((-fract3 - -fract4).Numerator(), 1285);
+			Assert::AreEqual((-fract3 - -fract4).Denominator(), 693);
+		}
+
+		TEST_METHOD(UnarySubstractionFractions) {
+			Fraction<int> fract1 = Fraction<int>(3, 2);
+			Assert::AreEqual((-fract1).Numerator(), -3);
+			Assert::AreEqual((-fract1).Denominator(), 2);
+
+			Fraction<double> fract2 = Fraction<double>(5.0, 99.0);
+			Assert::AreEqual((-fract2).Numerator(), -5.0);
+			Assert::AreEqual((-fract2).Denominator(), 99.0);
+		}
+
+		TEST_METHOD(AssigningToFractions) {
+			Fraction<int> fract1 = Fraction<int>(3, 2);
+			Fraction<int> fract2 = Fraction<int>(1, 2);
+			fract2 = fract1;
+			Assert::AreEqual((fract2).Numerator(), 3);
+			Assert::AreEqual((fract2).Denominator(), 2);
+
+
+			Fraction<double> fract3 = Fraction<double>(5.1, 99.88);
+			Fraction<double> fract4 = Fraction<double>(-40.56, 21.88976);
+
+			fract3 = fract4;
+			Assert::AreEqual(fract3.Numerator(), -40.56);
+			Assert::AreEqual(fract3.Denominator(), 21.88976);
+
 		}
 
 		TEST_METHOD(MultiplingFractions) {
@@ -147,7 +189,7 @@ namespace UnitTests
 			Assert::AreEqual(fract2.ToDouble(), 3.0);
 		}
 
-		TEST_METHOD(RaizeToPower) {
+		TEST_METHOD(RaizeToPowerFraction) {
 			Fraction<int> fract1 = Fraction<int>(3, 2);
 			fract1 = fract1 ^ 2;
 			Assert::AreEqual(fract1.Numerator(), 9);
@@ -174,5 +216,18 @@ namespace UnitTests
 			Assert::AreEqual(fract3.Denominator(), 1.0);
 		}
 
+		TEST_METHOD(CheckEqualityFractions) {
+			Fraction<int> fract1 = Fraction<int>(3, 2);
+			Fraction<int> fract2 = Fraction<int>(3, 2);
+			Assert::AreEqual(fract1 == fract2, true);
+
+			Fraction<double> fract3 = Fraction<double>(1.0, 3.0);
+			Fraction<double> fract4 = Fraction<double>(2.0, 3.0);
+			Assert::AreEqual(fract3 == fract4, false);
+
+			Fraction<int> fract5 = Fraction<int>(3, 2);
+			Fraction<int> fract6 = Fraction<int>(12, 8);
+			Assert::AreEqual(fract1 == fract2, true);
+		}
 	};
 }

@@ -20,10 +20,15 @@ public:
 	T Denominator();
 
 	Fraction<T> operator+(Fraction<T>);
+	Fraction<T> operator+();
 	Fraction<T> operator-(Fraction<T>);
+	Fraction<T> operator-();
+	Fraction<T>& operator=(Fraction<T>);
+	bool operator==(Fraction<T>);
+
 	Fraction<T> operator*(Fraction<T>);
 	Fraction<T> operator/(Fraction<T>);
-	Fraction<T>& operator^(T);
+	Fraction<T> operator^(T);
 
 	Fraction<T>& Simplify();
 
@@ -80,6 +85,16 @@ Fraction<T> Fraction<T>::operator+(Fraction<T> _fraction)
 }
 
 template<class T>
+Fraction<T> Fraction<T>::operator+()
+{
+	T _num = numerator;
+	T _den = denominator;
+
+	Fraction<T> retFraction = Fraction<T>(_num, _den);
+	return retFraction;
+}
+
+template<class T>
 Fraction<T> Fraction<T>::operator-(Fraction<T> _fraction)
 {
 	T _den = LCM(denominator, _fraction.Denominator());
@@ -87,6 +102,35 @@ Fraction<T> Fraction<T>::operator-(Fraction<T> _fraction)
 
 	Fraction<T> retFraction = Fraction<T>(_num, _den);
 	return retFraction;
+}
+
+template<class T>
+Fraction<T> Fraction<T>::operator-()
+{
+	T _num = (-1)*numerator;
+	T _den = denominator;
+
+	Fraction<T> retFraction = Fraction<T>(_num, _den);
+	return retFraction;
+}
+
+template<class T>
+Fraction<T>& Fraction<T>::operator=(Fraction<T> _fraction)
+{
+	denominator = _fraction.Denominator();
+	numerator = _fraction.Numerator();
+
+	return *this;
+}
+
+template<class T>
+bool Fraction<T>::operator==(Fraction<T> _fraction)
+{
+	if (denominator == _fraction.Denominator() && numerator == _fraction.Numerator())
+	{
+		return true;
+	}
+	return false;
 }
 
 template<class T>
@@ -110,19 +154,23 @@ Fraction<T> Fraction<T>::operator/(Fraction<T> _fraction)
 }
 
 template<class T>
-Fraction<T>& Fraction<T>::operator^(T _power)
+Fraction<T> Fraction<T>::operator^(T _power)
 {
+	T _num = numerator;
+	T _den = denominator;
+
 	if (_power < 0) {
-		T temp = numerator;
-		numerator = denominator;
-		denominator = temp;
+		T temp = _num;
+		_num = _den;
+		_den = temp;
 		_power = std::abs(_power);
 	}
 
-	numerator = (T)std::pow(numerator, _power);
-	denominator = (T)std::pow(denominator, _power);
+	_num = (T)std::pow(_num, _power);
+	_den = (T)std::pow(_den, _power);
 
-	return *this;
+	Fraction<T> retFraction = Fraction<T>(_num, _den);
+	return retFraction;
 }
 
 template<class T>
