@@ -54,7 +54,25 @@ namespace UnitTests
 			Assert::AreEqual(fFraction.Numerator(), 2.f);
 			Assert::AreEqual(fFraction.Denominator(), 3.f);
 		}
-		
+
+		TEST_METHOD(CreateWithNegativeArguments) {
+
+			// Negative Integer fraction type
+			Fraction<int> iFraction1 = Fraction<int>(-2, 3);
+			Assert::AreEqual(iFraction1.Numerator(), -2);
+			Assert::AreEqual(iFraction1.Denominator(), 3);
+
+			// Negative Integer fraction type
+			Fraction<int> iFraction2 = Fraction<int>(2, -3);
+			Assert::AreEqual(iFraction2.Numerator(), -2);
+			Assert::AreEqual(iFraction2.Denominator(), 3);
+
+			// Negative Integer fraction type
+			Fraction<int> iFraction3 = Fraction<int>(-2, -3);
+			Assert::AreEqual(iFraction3.Numerator(), 2);
+			Assert::AreEqual(iFraction3.Denominator(), 3);
+		}
+
 		TEST_METHOD(AddingFractions) {
 			Fraction<int> fract1 = Fraction<int>(3, 2);
 			Fraction<int> fract2 = Fraction<int>(1, 2);
@@ -148,6 +166,25 @@ namespace UnitTests
 			Assert::AreEqual((fract3 / fract4).Numerator(), 7);
 			Assert::AreEqual((fract3 / fract4).Denominator(), 264);
 		}
+		
+		TEST_METHOD(DivideByZero)
+		{
+			bool exceptionThrown = false;
+			Fraction<int> _fraction = Fraction<int>(2, 1);
+			Fraction<int> _fractionZero = Fraction<int>(0, 1);
+
+			try
+			{
+				_fraction / _fractionZero;
+			}
+			catch (const std::overflow_error e)
+			{
+				exceptionThrown = true;
+			}
+
+			Assert::IsTrue(exceptionThrown);
+
+		}
 
 		TEST_METHOD(SimplifyFraction) {
 			Fraction<int> fract1 = Fraction<int>(3, 2);
@@ -229,5 +266,20 @@ namespace UnitTests
 			Fraction<int> fract6 = Fraction<int>(12, 8);
 			Assert::AreEqual(fract1 == fract2, true);
 		}
+
+		TEST_METHOD(CompareFractions) {
+			//Fraction<int> fract1 = Fraction<int>(3, 2);
+			//Fraction<int> fract2 = Fraction<int>(3, 2);
+			//Assert::AreEqual(fract1 == fract2, true);
+
+			//Fraction<double> fract3 = Fraction<double>(1.0, 3.0);
+			//Fraction<double> fract4 = Fraction<double>(2.0, 3.0);
+			//Assert::AreEqual(fract3 == fract4, false);
+
+			//Fraction<int> fract5 = Fraction<int>(3, 2);
+			//Fraction<int> fract6 = Fraction<int>(12, 8);
+			//Assert::AreEqual(fract1 == fract2, true);
+		}
+
 	};
 }

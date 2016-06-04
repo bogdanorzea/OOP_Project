@@ -24,11 +24,15 @@ public:
 	Fraction<T> operator-(Fraction<T>);
 	Fraction<T> operator-();
 	Fraction<T>& operator=(Fraction<T>);
-	bool operator==(Fraction<T>);
-
 	Fraction<T> operator*(Fraction<T>);
 	Fraction<T> operator/(Fraction<T>);
 	Fraction<T> operator^(T);
+
+	bool operator==(Fraction<T>);
+	bool operator<(Fraction<T>);
+	bool operator<=(Fraction<T>);
+	bool operator>(Fraction<T>);
+	bool operator>=(Fraction<T>);
 
 	Fraction<T>& Simplify();
 
@@ -50,6 +54,10 @@ template <class T>
 Fraction<T>::Fraction(T _num, T _den = (T)1)
 {
 	numerator = _num;
+	if (0 == _den)
+	{
+		throw std::overflow_error("Divide by zero exception");
+	}
 	denominator = _den;
 	Simplify();
 
@@ -134,6 +142,30 @@ bool Fraction<T>::operator==(Fraction<T> _fraction)
 }
 
 template<class T>
+bool Fraction<T>::operator<(Fraction<T> _fraction)
+{
+	return false;
+}
+
+template<class T>
+bool Fraction<T>::operator<=(Fraction<T> _fraction)
+{
+	return false;
+}
+
+template<class T>
+bool Fraction<T>::operator>(Fraction<T> _fraction)
+{
+	return false;
+}
+
+template<class T>
+bool Fraction<T>::operator>=(Fraction<T> _fraction)
+{
+	return false;
+}
+
+template<class T>
 Fraction<T> Fraction<T>::operator*(Fraction<T> _fraction)
 {
 	T _den = denominator * _fraction.Denominator();
@@ -176,9 +208,16 @@ Fraction<T> Fraction<T>::operator^(T _power)
 template<class T>
 Fraction<T>& Fraction<T>::Simplify()
 {
+	// Ensures that denominator is always positive
+	if (denominator < 0)
+	{
+		denominator *= (-1);
+		numerator *= (-1);
+	}
+
 	if (typeid(int).name() == typeid(T).name())
 	{
-		T divizor = GCD(std::abs(denominator), std::abs(numerator));
+		T divizor = GCD(denominator, std::abs(numerator));
 		numerator /= divizor;
 		denominator /= divizor;
 	}
