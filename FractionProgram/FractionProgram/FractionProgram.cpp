@@ -17,11 +17,68 @@
 // tip int (după definirea acestora ca o clasă separată), etc.
 
 #include "FractionClass.h"
+#include "ComplexClass.h"
+#define	SIGN(x) ((x < 0) ? ("") : ("+"))
 
 using namespace std;
 
+Fraction<Complex<int>> getFractionFromUser();
+void printFunction(Fraction<Complex<int>>);
+
+
 int main() {
+	cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+	cout << "+ Program facut de Bogdan Orzea (Anul I ID, 2015-2016) +" << endl;
+	cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+	cout << endl;
+
+
+	cout << "Definirea primei fractii:" << endl;
+	Fraction<Complex<int>> temp1 = getFractionFromUser();
+	cout << "Numarul introdus este:";
+	printFunction(temp1);
+	cout << endl;
+
+	cout << endl << "Definirea celei de-a doua fractii:" << endl;
+	Fraction<Complex<int>> temp2 = getFractionFromUser();
+	cout << "Numarul introdus este:";
+	printFunction(temp2);
+	cout << endl;
+
+	cout << "Rezultatul adunarii celor doua fractii este:" << endl;
+	printFunction(temp1 + temp2);
+	cout << endl;
+
+
+	cout << "Rezultatul scaderii celor doua fractii este:" << endl;
+	printFunction(temp1 - temp2);
+	cout << endl;
 
 	return 0;
 }
 
+Fraction<Complex<int>> getFractionFromUser() {
+	int a, b, c, d;
+	cout << "Va rog introduceti numaratorul fractiei:" << endl;
+	cout << "Partea reala a numaratorului: ";
+	cin >> a;
+	cout << "Partea imaginara a numaratorului: ";
+	cin >> b;
+	cout << "Va rog introduceti numitorul fractiei:" << endl;
+	cout << "Partea reala a numitorului: ";
+	cin >> c;
+	cout << "Partea imaginara a numitorului: ";
+	cin >> d;
+	return Fraction<Complex<int>>(Complex<int>(a, b), Complex<int>(c, d));
+}
+
+void printFunction(Fraction<Complex<int>> _fraction) {
+	int a = _fraction.Numerator().Real();
+	int b = _fraction.Numerator().Imaginary();
+	int c = _fraction.Denominator().Real();
+	int d = _fraction.Denominator().Imaginary();
+
+	cout << "(" << a << SIGN(b) << b << "i)" <<
+		" / (" << c << SIGN(d) << d << "i)";
+
+}

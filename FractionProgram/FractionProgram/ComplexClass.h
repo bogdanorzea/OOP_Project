@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 
-#define	SIGN(x) ((x < 0) ? ("-") : ("+"))
+//#define	SIGN(x) ((x < 0) ? ("-") : ("+"))
 
 using namespace std;
 
