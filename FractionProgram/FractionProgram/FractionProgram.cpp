@@ -1,4 +1,5 @@
-﻿// Sa se definească o clasă generică pentru fracţii cu numărător şi 
+﻿// Subiectul 1
+// Sa se definească o clasă generică pentru fracţii cu numărător şi 
 // numitor de un tip T neprecizat(parametru):
 // overload =
 // overload ==
@@ -15,6 +16,11 @@
 // Se vor da exemple de creare şi utilizare de obiecte pentru diferite tipuri ale numărătorului 
 // şi numitorului : int, întregi Gauss, adică numere complexe cu părţile reală şi imaginară de 
 // tip int (după definirea acestora ca o clasă separată), etc.
+//
+// De facut suplimentar:
+// Constructor copiere
+// Operatori unari ++, -- pre si post
+
 
 #include "FractionClass.h"
 #include "ComplexClass.h"
@@ -80,5 +86,4 @@ void printFunction(Fraction<Complex<int>> _fraction) {
 
 	cout << "(" << a << SIGN(b) << b << "i)" <<
 		" / (" << c << SIGN(d) << d << "i)";
-
 }

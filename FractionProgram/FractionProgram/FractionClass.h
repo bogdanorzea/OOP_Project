@@ -21,9 +21,13 @@ public:
 	Fraction<T> operator+(Fraction<T>);
 	Fraction<T> operator+(T);
 	Fraction<T> operator+();
+	Fraction<T> operator++(); // overloaded prefix ++ operator
+	Fraction<T> operator++(int); // overloaded postfix ++ operator
 	Fraction<T> operator-(Fraction<T>);
 	Fraction<T> operator-(T);
 	Fraction<T> operator-();
+	Fraction<T> operator--(); // overloaded prefix ++ operator
+	Fraction<T> operator--(int); // overloaded postfix ++ operator
 	Fraction<T>& operator=(Fraction<T>);
 	Fraction<T> operator*(Fraction<T>);
 	Fraction<T> operator*(T);
@@ -36,6 +40,8 @@ public:
 	bool operator<=(Fraction<T>);
 	bool operator>(Fraction<T>);
 	bool operator>=(Fraction<T>);
+
+	Fraction(const Fraction<T>& _fraction);
 
 	operator double();
 
@@ -53,6 +59,15 @@ template <class T>
 Fraction<T>::Fraction()
 {
 	//cout << "Fraction is " << numerator << "/" << denominator << endl;
+}
+
+// Copy constructor
+template<class T>
+Fraction<T>::Fraction(const Fraction<T>& _fraction)
+{
+	Fraction<T>& reffraction = const_cast<Fraction<T>&>(_fraction);
+	numerator = reffraction.Numerator();
+	denominator = reffraction.Denominator();
 }
 
 template <class T>
@@ -108,6 +123,21 @@ Fraction<T> Fraction<T>::operator+()
 }
 
 template<class T>
+Fraction<T> Fraction<T>::operator++()
+{
+	*this = *this + Fraction<T>((T)1);
+	return *this;
+}
+
+template<class T>
+Fraction<T> Fraction<T>::operator++(int)
+{
+	Fraction<T> original = *this;
+	*this = *this + Fraction<T>((T)1);
+	return original;
+}
+
+template<class T>
 Fraction<T> Fraction<T>::operator-(Fraction<T> _fraction)
 {
 	T _num = numerator * _fraction.Denominator() - _fraction.Numerator() * denominator;
@@ -130,6 +160,21 @@ Fraction<T> Fraction<T>::operator-()
 
 	Fraction<T> retFraction = Fraction<T>(_num, _den);
 	return retFraction;
+}
+
+template<class T>
+Fraction<T> Fraction<T>::operator--()
+{
+	*this = *this - Fraction<T>((T)1);
+	return *this;
+}
+
+template<class T>
+Fraction<T> Fraction<T>::operator--(int)
+{
+	Fraction<T> original = *this;
+	*this = *this - Fraction<T>((T)1);
+	return original;
 }
 
 template<class T>
@@ -310,3 +355,4 @@ T GCD(T first, T second) {
 	return first;
 }
 #pragma endregion
+

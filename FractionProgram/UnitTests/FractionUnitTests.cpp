@@ -46,6 +46,10 @@ namespace UnitTests
 		}
 
 		TEST_METHOD(Fractions_OperatorAddition) {
+			Fraction<int> temp1 = Fraction<int>(1, 2);
+			Assert::AreEqual((++temp1).Numerator(), 3);
+			Assert::AreEqual((temp1++).Numerator(), 3);
+
 			Assert::AreEqual((+Fraction<int>(-3, 2)).Numerator(), -3);
 			Assert::AreEqual((+Fraction<int>(-3, 2)).Denominator(), 2);
 
@@ -65,9 +69,14 @@ namespace UnitTests
 			Fraction<double> temp5 = Fraction<double>(3.0, 2.0) + 4.0;
 			Assert::AreEqual(temp5.Numerator(), 11.0);
 			Assert::AreEqual(temp5.Denominator(), 2.0);
+
 		}
 
 		TEST_METHOD(Fractions_OperatorSubstraction) {
+			Fraction<int> temp0 = Fraction<int>(5, 2);
+			Assert::AreEqual((--temp0).Numerator(), 3);
+			Assert::AreEqual((temp0--).Numerator(), 3);
+			
 			Assert::AreEqual((-Fraction<int>(3, 2)).Numerator(), -3);
 			Assert::AreEqual((-Fraction<int>(3, 2)).Denominator(), 2);
 
