@@ -11,10 +11,9 @@ template <class T>
 class Complex
 {
 	T real, imaginary;
-	Complex();
 
 public:
-
+	Complex();
 	Complex(T, T = (T)0);
 
 	T Real();
@@ -27,6 +26,10 @@ public:
 	Complex<T> operator-(T);
 	Complex<T> operator-();
 	Complex<T>& operator=(Complex<T>);
+	Complex<T>& operator*=(Complex<T>);
+	Complex<T> operator+=(Complex<T>);
+	Complex<T> operator-=(Complex<T>);
+	Complex<T> operator/=(Complex<T>);
 	Complex<T> operator*(Complex<T>);
 	Complex<T> operator*(T);
 	Complex<T> operator/(Complex<T>);
@@ -35,6 +38,7 @@ public:
 	Complex<T> operator^(int);
 
 	bool operator==(Complex<T>);
+	bool operator!=(Complex<T>);
 	bool operator<(Complex<T>);
 	bool operator<=(Complex<T>);
 	bool operator>(Complex<T>);
@@ -53,7 +57,7 @@ public:
 template <class T>
 Complex<T>::Complex()
 {
-	cout << "Complex number is " << real << SIGN(imaginary) << imaginary << "*i" << endl;
+	//cout << "Complex number is " << real << SIGN(imaginary) << imaginary << "*i" << endl;
 }
 
 template <class T>
@@ -62,7 +66,7 @@ Complex<T>::Complex(T _real, T _imag = (T)0)
 	real = _real;
 	imaginary = _imag;
 
-	cout << "Complex number is " << real << SIGN(imaginary) << imaginary << "*i" << endl;
+	//cout << "Complex number is " << real << SIGN(imaginary) << imaginary << "*i" << endl;
 }
 
 template <class T>
@@ -137,13 +141,48 @@ Complex<T>& Complex<T>::operator=(Complex<T> _complex)
 }
 
 template<class T>
+Complex<T>& Complex<T>::operator*=(Complex<T> _complex)
+{
+	*this = (*this) * (_complex);
+	return *this;
+}
+
+template<class T>
+Complex<T> Complex<T>::operator+=(Complex<T>_complex)
+{
+	return ((*this) * (_complex));
+}
+
+template<class T>
+Complex<T> Complex<T>::operator-=(Complex<T> _complex)
+{
+	return ((*this) - (_complex));
+}
+
+template<class T>
+Complex<T> Complex<T>::operator/=(Complex<T> _complex)
+{
+	return ((*this) / (_complex));
+}
+
+template<class T>
 bool Complex<T>::operator==(Complex<T> _complex)
 {
-	if (this->Modulus() == _complex.Modulus())
+	if (real == _complex.Real() && imaginary == _complex.Imaginary())
 	{
 		return true;
 	}
-	
+
+	return false;
+}
+
+template<class T>
+inline bool Complex<T>::operator!=(Complex<T>_complex)
+{
+	if (real != _complex.Real() || imaginary != _complex.Imaginary())
+	{
+		return true;
+	}
 	return false;
 }
 
@@ -154,7 +193,7 @@ bool Complex<T>::operator<(Complex<T> _complex)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -165,7 +204,7 @@ bool Complex<T>::operator<=(Complex<T> _complex)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -176,7 +215,7 @@ bool Complex<T>::operator>(Complex<T> _complex)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -187,7 +226,7 @@ bool Complex<T>::operator>=(Complex<T> _complex)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 

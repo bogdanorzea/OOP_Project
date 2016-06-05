@@ -9,54 +9,38 @@ namespace UnitTests
 	{
 	public:
 
-		TEST_METHOD(Complex_CreateWithOneArgument)
+		TEST_METHOD(Complex_Creation)
 		{
-			// Integer fraction type
 			Assert::AreEqual(Complex<int>(2).Real(), 2);
 			Assert::AreEqual(Complex<int>(2).Imaginary(), 0);
 
-			// Long fraction type
 			Assert::AreEqual(Complex<long>(2L).Real(), 2L);
 			Assert::AreEqual(Complex<long>(2L).Imaginary(), 0L);
 
-			// Double fraction type
 			Assert::AreEqual(Complex<double>(2.0).Real(), 2.0);
 			Assert::AreEqual(Complex<double>(2.0).Imaginary(), 0.0);
 
-			// Float fraction type
 			Assert::AreEqual(Complex<float>(2.f).Real(), 2.f);
 			Assert::AreEqual(Complex<float>(2.f).Imaginary(), 0.f);
-		}
 
-		TEST_METHOD(Complex_CreateWithTwoArguments)
-		{
-			// Integer fraction type
 			Assert::AreEqual(Complex<int>(2, 3).Real(), 2);
 			Assert::AreEqual(Complex<int>(2, 3).Imaginary(), 3);
 
-			// Long fraction type
 			Assert::AreEqual(Complex<long>(2L, 3L).Real(), 2L);
 			Assert::AreEqual(Complex<long>(2L, 3L).Imaginary(), 3L);
 
-			// Double fraction type
 			Assert::AreEqual(Complex<double>(2.0, 3.0).Real(), 2.0);
 			Assert::AreEqual(Complex<double>(2.0, 3.0).Imaginary(), 3.0);
 
-			// Float fraction type
 			Assert::AreEqual(Complex<float>(2.f, 3.f).Real(), 2.f);
 			Assert::AreEqual(Complex<float>(2.f, 3.f).Imaginary(), 3.f);
-		}
 
-		TEST_METHOD(Complex_CreateWithNegativeArguments) {
-			// Negative Integer fraction type
 			Assert::AreEqual(Complex<int>(-2, 3).Real(), -2);
 			Assert::AreEqual(Complex<int>(-2, 3).Imaginary(), 3);
 
-			// Negative Integer fraction type
 			Assert::AreEqual(Complex<int>(2, -3).Real(), 2);
 			Assert::AreEqual(Complex<int>(2, -3).Imaginary(), -3);
 
-			// Negative Integer fraction type
 			Assert::AreEqual(Complex<int>(-2, -3).Real(), -2);
 			Assert::AreEqual(Complex<int>(-2, -3).Imaginary(), -3);
 		}
@@ -77,16 +61,12 @@ namespace UnitTests
 			Complex<double> temp4 = Complex<double>(3.0, 2.0) + 1.0;
 			Assert::AreEqual(temp4.Real(), 4.0);
 			Assert::AreEqual(temp4.Imaginary(), 2.0);
-		}
 
-		TEST_METHOD(Complex_OperatorAdditionUnary) {
-			Complex<int> temp1 = Complex<int>(-3, 2);
-			Assert::AreEqual((+temp1).Real(), -3);
-			Assert::AreEqual((+temp1).Imaginary(), 2);
+			Assert::AreEqual((+Complex<int>(-3, 2)).Real(), -3);
+			Assert::AreEqual((+Complex<int>(-3, 2)).Imaginary(), 2);
 
-			Complex<double> temp2 = Complex<double>(5.0, 99.0);
-			Assert::AreEqual((+temp2).Real(), +5.0);
-			Assert::AreEqual((+temp2).Imaginary(), 99.0);
+			Assert::AreEqual((+Complex<double>(5.0, 99.0)).Real(), +5.0);
+			Assert::AreEqual((+Complex<double>(5.0, 99.0)).Imaginary(), 99.0);
 		}
 
 		TEST_METHOD(Complex_OperatorSubstraction) {
@@ -107,16 +87,12 @@ namespace UnitTests
 			Complex<double> temp5 = Complex<double>(3.0, 2.0) - 1.0;
 			Assert::AreEqual(temp5.Real(), 2.0);
 			Assert::AreEqual(temp5.Imaginary(), 2.0);
-		}
 
-		TEST_METHOD(Complex_OperatorSubstractionUnary) {
-			Complex<int> temp1 = Complex<int>(3, 2);
-			Assert::AreEqual((-temp1).Real(), -3);
-			Assert::AreEqual((-temp1).Imaginary(), -2);
+			Assert::AreEqual((-Complex<int>(3, 2)).Real(), -3);
+			Assert::AreEqual((-Complex<int>(3, 2)).Imaginary(), -2);
 
-			Complex<double> temp2 = Complex<double>(5.0, 99.0);
-			Assert::AreEqual((-temp2).Real(), -5.0);
-			Assert::AreEqual((-temp2).Imaginary(), -99.0);
+			Assert::AreEqual((-Complex<double>(5.0, 99.0)).Real(), -5.0);
+			Assert::AreEqual((-Complex<double>(5.0, 99.0)).Imaginary(), -99.0);
 		}
 
 		TEST_METHOD(Complex_OperatorAssignment) {
@@ -212,6 +188,5 @@ namespace UnitTests
 			Assert::AreEqual(Complex<int>(3, 2) > Complex<int>(3, 2), false);
 			Assert::AreEqual(Complex<int>(3, 2) >= Complex<int>(3, 2), true);
 		}
-
 	};
 }

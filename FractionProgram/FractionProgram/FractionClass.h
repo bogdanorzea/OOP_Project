@@ -13,7 +13,6 @@ class Fraction
 	Fraction();
 
 public:
-
 	Fraction(T, T = (T)1);
 
 	T Numerator();
@@ -30,7 +29,7 @@ public:
 	Fraction<T> operator*(T);
 	Fraction<T> operator/(Fraction<T>);
 	Fraction<T> operator/(T);
-	Fraction<T> operator^(T);
+	Fraction<T> operator^(int);
 
 	bool operator==(Fraction<T>);
 	bool operator<(Fraction<T>);
@@ -53,21 +52,21 @@ public:
 template <class T>
 Fraction<T>::Fraction()
 {
-	cout << "Fraction is " << numerator << "/" << denominator << endl;
+	//cout << "Fraction is " << numerator << "/" << denominator << endl;
 }
 
 template <class T>
 Fraction<T>::Fraction(T _num, T _den = (T)1)
 {
 	numerator = _num;
-	if (0 == _den)
+	if (_den == (T)0)
 	{
 		throw std::overflow_error("Divide by zero exception");
 	}
 	denominator = _den;
 	Simplify();
 
-	cout << "Fraction is " << _num << "/" << _den << endl;
+	//cout << "Fraction is " << _num << "/" << _den << endl;
 }
 
 template <class T>
@@ -90,12 +89,10 @@ inline T Fraction<T>::Denominator()
 template<class T>
 Fraction<T> Fraction<T>::operator+(Fraction<T> _fraction)
 {
-	// TODO will not work for floats	
-	T _den = LCM(denominator, _fraction.Denominator());
-	T _num = numerator * _den / denominator + _fraction.Numerator() * _den / _fraction.Denominator();
+	T _num = numerator * _fraction.Denominator() + _fraction.Numerator() * denominator;
+	T _den = denominator * _fraction.Denominator();
 
-	Fraction<T> retFraction = Fraction<T>(_num, _den);
-	return retFraction;
+	return Fraction<T>(_num, _den);
 }
 
 template<class T>
@@ -107,21 +104,16 @@ Fraction<T> Fraction<T>::operator+(T _number)
 template<class T>
 Fraction<T> Fraction<T>::operator+()
 {
-	T _num = numerator;
-	T _den = denominator;
-
-	Fraction<T> retFraction = Fraction<T>(_num, _den);
-	return retFraction;
+	return Fraction<T>(numerator, denominator);
 }
 
 template<class T>
 Fraction<T> Fraction<T>::operator-(Fraction<T> _fraction)
 {
-	T _den = LCM(denominator, _fraction.Denominator());
-	T _num = numerator * _den / denominator - _fraction.Numerator() * _den / _fraction.Denominator();
+	T _num = numerator * _fraction.Denominator() - _fraction.Numerator() * denominator;
+	T _den = denominator * _fraction.Denominator();
 
-	Fraction<T> retFraction = Fraction<T>(_num, _den);
-	return retFraction;
+	return Fraction<T>(_num, _den);
 }
 
 template<class T>
@@ -133,7 +125,7 @@ Fraction<T> Fraction<T>::operator-(T _number)
 template<class T>
 Fraction<T> Fraction<T>::operator-()
 {
-	T _num = (-1)*numerator;
+	T _num = numerator * (-1);
 	T _den = denominator;
 
 	Fraction<T> retFraction = Fraction<T>(_num, _den);
@@ -156,7 +148,7 @@ bool Fraction<T>::operator==(Fraction<T> _fraction)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -167,7 +159,7 @@ bool Fraction<T>::operator<(Fraction<T> _fraction)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -178,7 +170,7 @@ bool Fraction<T>::operator<=(Fraction<T> _fraction)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -189,7 +181,7 @@ bool Fraction<T>::operator>(Fraction<T> _fraction)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -200,7 +192,7 @@ bool Fraction<T>::operator>=(Fraction<T> _fraction)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -243,38 +235,51 @@ Fraction<T> Fraction<T>::operator/(T _divisor)
 }
 
 template<class T>
-Fraction<T> Fraction<T>::operator^(T _power)
+Fraction<T> Fraction<T>::operator^(int _power)
 {
 	T _num = numerator;
 	T _den = denominator;
 
-	if (_power < 0) {
+	if (_power == 0)
+	{
+		return Fraction<T>((T)1);
+	}
+	else if (_power < 0) {
 		T temp = _num;
 		_num = _den;
 		_den = temp;
-		_power = std::abs(_power);
+		_power = (_power) * (-1);
 	}
 
-	_num = (T)std::pow(_num, _power);
-	_den = (T)std::pow(_den, _power);
+	T temp_num = _num;
+	T temp_den = _den;
 
-	Fraction<T> retFraction = Fraction<T>(_num, _den);
-	return retFraction;
+	for (int i = 1; i < _power; i++)
+	{
+		_num *= temp_num;
+		_den *= temp_den;
+	}
+
+	return Fraction<T>(_num, _den);
 }
 
 template<class T>
 Fraction<T>& Fraction<T>::Simplify()
 {
-	// Ensures that denominator is always positive
 	if (denominator < 0)
 	{
 		denominator *= (-1);
 		numerator *= (-1);
 	}
 
-	if (typeid(int).name() == typeid(T).name())
+	if (typeid(int).name() == typeid(T).name() || typeid(long).name() == typeid(T).name())
 	{
-		T divizor = GCD(denominator, std::abs(numerator));
+		T abs_num = numerator;
+		if ((T)0 > abs_num)
+		{
+			abs_num *= (-1);
+		}
+		T divizor = GCD(denominator, abs_num);
 		numerator /= divizor;
 		denominator /= divizor;
 	}
@@ -297,11 +302,12 @@ T LCM(T first, T second) {
 
 template<class T>
 T GCD(T first, T second) {
-	if (second == 0) {
-		return first;
+	if (second == 0) return first;
+	while (first != second)
+	{
+		if (first > second) first -= second;
+		else second -= first;
 	}
-	else {
-		return GCD(second, (T)std::fmod(first, second));
-	}
+	return first;
 }
 #pragma endregion
