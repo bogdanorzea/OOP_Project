@@ -266,7 +266,7 @@ Fraction<T> Fraction<T>::operator^(int _power)
 template<class T>
 Fraction<T>& Fraction<T>::Simplify()
 {
-	if (denominator < 0)
+	if (denominator < (T)0)
 	{
 		denominator *= (-1);
 		numerator *= (-1);
@@ -289,9 +289,8 @@ Fraction<T>& Fraction<T>::Simplify()
 template<class T>
 double Fraction<T>::ToDouble()
 {
-	return (double)numerator / denominator;
+	return ((double)numerator / (double)denominator);
 }
-
 #pragma endregion
 
 #pragma region HelperFunctions
@@ -302,7 +301,7 @@ T LCM(T first, T second) {
 
 template<class T>
 T GCD(T first, T second) {
-	if (second == 0) return first;
+	if (second == (T)0) return first;
 	while (first != second)
 	{
 		if (first > second) first -= second;

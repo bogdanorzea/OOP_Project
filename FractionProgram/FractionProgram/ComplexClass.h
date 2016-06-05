@@ -43,6 +43,7 @@ public:
 	bool operator<=(Complex<T>);
 	bool operator>(Complex<T>);
 	bool operator>=(Complex<T>);
+	operator double();
 
 	Complex<T> Conjugate();
 
@@ -228,6 +229,12 @@ bool Complex<T>::operator>=(Complex<T> _complex)
 	}
 
 	return false;
+}
+
+template<class T>
+Complex<T>::operator double()
+{
+	return Modulus();
 }
 
 template<class T>

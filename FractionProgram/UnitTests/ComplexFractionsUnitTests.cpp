@@ -76,26 +76,14 @@ namespace UnitTests
 		}
 
 		TEST_METHOD(CF_OperatorComparations) {
-			//Fraction<Complex<int>> temp1 = Fraction<Complex<int>>(Complex<int>(5, 3), Complex<int>(5, -1));
-			//Fraction<Complex<int>> temp2 = Fraction<Complex<int>>(Complex<int>(6, 0), Complex<int>(-9, 7));
+			Fraction<Complex<int>> temp1 = Fraction<Complex<int>>(Complex<int>(5, 3), Complex<int>(5, -1));
+			Fraction<Complex<int>> temp2 = Fraction<Complex<int>>(Complex<int>(6, 0), Complex<int>(-9, 7));
 
-			//
-			//Assert::AreEqual(Fraction<Complex<int>>(Complex<int>(5, 3), Complex<int>(5, -1)) == Fraction<Complex<int>>(Complex<int>(6, 0), Complex<int>(-9, 7), false);
-			//Assert::AreEqual(Complex<int>(3, 2) == Complex<int>(12, 8), false);
-			//Assert::AreEqual(Complex<int>(3, 2) == Complex<int>(3, 2), true);
-			//Assert::AreEqual(Complex<double>(3.0, 2.0) == Complex<double>(3.0, 2.0), true);
-			//Assert::AreEqual(Complex<int>(3, 2) == Complex<int>(3, 3), false);
-			//Assert::AreEqual(Complex<double>(3.0, 2.0) == Complex<double>(3.0, 3.0), false);
+			Assert::AreEqual(Fraction<Complex<int>>(Complex<int>(5, 3), Complex<int>(5, -1)) == Fraction<Complex<int>>(Complex<int>(6, 0), Complex<int>(-9, 7)), false);
+			Assert::AreEqual(Fraction<Complex<int>>(Complex<int>(5, 3), Complex<int>(5, -1)) == Fraction<Complex<int>>(Complex<int>(5, 3), Complex<int>(5, -1)), true);
 
-			//Assert::AreEqual(Complex<int>(3, 2) < Complex<int>(5, 2), true);
-			//Assert::AreEqual(Complex<double>(3.0, 2.0) < Complex<double>(5.0, 2.0), true);
-			//Assert::AreEqual(Complex<int>(3, 2) < Complex<int>(3, 2), false);
-			//Assert::AreEqual(Complex<int>(3, 2) <= Complex<int>(3, 2), true);
-
-			//Assert::AreEqual(Complex<int>(3, 2) > Complex<int>(5, 2), false);
-			//Assert::AreEqual(Complex<double>(3.0, 2.0) > Complex<double>(1.0, 2.0), true);
-			//Assert::AreEqual(Complex<int>(3, 2) > Complex<int>(3, 2), false);
-			//Assert::AreEqual(Complex<int>(3, 2) >= Complex<int>(3, 2), true);
+			Assert::AreEqual(Fraction<Complex<int>>(Complex<int>(5, 3), Complex<int>(5, -1)) > Fraction<Complex<int>>(Complex<int>(6, 0), Complex<int>(-9, 7)), true);
+			Assert::AreEqual(Fraction<Complex<int>>(Complex<int>(5, 3), Complex<int>(5, -1)) < Fraction<Complex<int>>(Complex<int>(6, 0), Complex<int>(-9, 7)), false);
 		}
 	};
 }
